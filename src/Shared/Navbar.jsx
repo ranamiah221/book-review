@@ -135,7 +135,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <Link>
-          <button className="bg-green-400 text-white px-3 py-2 rounded-lg font-medium mr-2">
+          <button className="bg-[#23BE0A] text-white px-3 py-2 rounded-lg font-medium mr-2">
             Sign in
           </button>
         </Link>
