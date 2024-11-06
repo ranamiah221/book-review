@@ -4,7 +4,7 @@ import Navbar from '../Shared/Navbar';
 
 const MyLayouts = () => {
     return (
-        <div>
+        <div className='max-w-7xl mx-auto'>
             <Navbar></Navbar>
             <Outlet></Outlet>
         </div>
