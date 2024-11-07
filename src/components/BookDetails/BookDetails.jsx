@@ -19,16 +19,16 @@ const BookDetails = () => {
   } = bookDetails;
 
   return (
-    <div className="mt-2 flex gap-5 ">
-     <div className="bg-[#F3F3F3] flex justify-center items-center rounded-lg p-10 w-1/2">
-     <img className="w-2/4"
+    <div className="mt-2 md:flex gap-5 ">
+     <div className="bg-[#F3F3F3] flex justify-center items-center rounded-lg md:p-10 md:w-1/2">
+     <img className="md:w-2/4"
           src={image}
           alt="Album"
         />
      </div>
         
      
-      <div className="w-1/2 flex flex-col">
+      <div className="md:w-1/2 md:flex flex-col p-4 md:p-0">
         <h2 className="text-4xl font-bold">{bookName}</h2>
         <p className="text-base font-normal pb-5 pt-3 border-b-2 border-dashed">By : {author}</p>
         <p className="text-lg font-normal border-b-2 py-3 border-dashed mb-4">{category}</p>
