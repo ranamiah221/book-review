@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import SectionTitle from "./../../components/SectionTitle/SectionTitle";
 import { IoIosArrowDown } from "react-icons/io";
 import Sorting from "../../components/Sorting/Sorting";
+import { getReadItem } from "../..";
 const BookList = () => {
     const [isActive, setIsActive]=useState(true);
     const handleActive=()=>{
       setIsActive(!isActive) 
     }
+    const book=getReadItem();
+    console.log(book);
   return (
     <div>
       {/* section title */}

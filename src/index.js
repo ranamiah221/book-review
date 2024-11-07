@@ -1,26 +1,29 @@
-
+// Reading book.....
 // get items...
-export const getItem =()=>{
-    let bookList=[];
-    const storedBook=localStorage.getItem('bookList');
+export const getReadItem =()=>{
+    let readBook=[];
+    const storedBook=localStorage.getItem('readBook');
     if (storedBook){
-         bookList=JSON.parse(storedBook);
+         readBook=JSON.parse(storedBook);
     }
-    return [];
+    return readBook;
 }
 // save items
-export const saveItem=book=>{
-      let bookList= getItem();
-     const isExist= bookList.find(b=> b.bookId === book.bookId);
+export const saveReadItem=book=>{
+      let readBook= getReadItem();
+     const isExist= readBook.find(b=> b.bookId == book.bookId);
      if(isExist){
-        alert('already exist')
+       return alert('already exist')
      }
-     bookList.push(book);
-     alert('book successfully added')
+     readBook.push(book);
+     localStorage.setItem('readBook', JSON.stringify(readBook))
+     alert('read book successfully added')
 }
-export const removeItem=id=>{
-    let bookList=getItem();
-    const remaining = bookList.filter(b=> b.bookId !== id)
-    localStorage.setItem('bookList', JSON.stringify(remaining))
+export const removeReadItem=id=>{
+    let readBook=getReadItem();
+    const remaining = readBook.filter(b=> b.bookId !== id)
+    localStorage.setItem('readBook', JSON.stringify(remaining))
     alert("remove successfully")
 }
+
+

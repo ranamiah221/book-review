@@ -1,11 +1,12 @@
 import { Link, useLoaderData, useParams } from "react-router-dom";
+import { saveReadItem} from "../..";
+import { saveWishItem } from "../../wish";
 
 const BookDetails = () => {
   const { id } = useParams();
   const books = useLoaderData([]);
-  const bookDetails = books.find((book) => book.bookId === id);
+  const book = books?.find(book => book.bookId === id);
   const {
-    bookId,
     bookName,
     author,
     image,
@@ -16,7 +17,15 @@ const BookDetails = () => {
     totalPages,
     publisher,
     yearOfPublishing,
-  } = bookDetails;
+  } = book;
+
+  const handleReadBook=(book)=>{
+    
+    saveReadItem(book);
+  }
+  const handleWishBook=(book)=>{
+     saveWishItem(book);
+  }
 
   return (
     <div className="mt-2 md:flex gap-5 ">
@@ -59,8 +68,8 @@ const BookDetails = () => {
          </div>
 
         <div className="card-actions justify-start">
-          <button className="btn bg-white border border-black">Read</button>
-          <button className="btn bg-cyan-500 text-white">Wishlist</button>
+          <button onClick={()=>handleReadBook(book)} className="btn bg-white border border-black">Read</button>
+          <button onClick={()=>handleWishBook(book)}className="btn bg-cyan-500 text-white">Wishlist</button>
           <Link to='/'><button className="btn bg-green-400 text-white">Home</button></Link>
         </div>
       </div>
