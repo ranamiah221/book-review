@@ -48,7 +48,7 @@ const BookDetails = () => {
             {tags[0]}
          </button>
          <button className="rounded-xl bg-[#F3F3F3] px-3 py-1 text-[#23BE0A] font-semibold">
-            {tags[0]}
+            {tags[1]}
          </button>
          </div>
 

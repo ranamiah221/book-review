@@ -1,15 +1,24 @@
-import React, { useState } from "react";
-import SectionTitle from "./../../components/SectionTitle/SectionTitle";
-import { IoIosArrowDown } from "react-icons/io";
-import Sorting from "../../components/Sorting/Sorting";
+import React, { useEffect, useState } from "react";
 import { getReadItem } from "../..";
+import { wishItem } from "../../wish";
+import SectionTitle from './../../components/SectionTitle/SectionTitle';
+import Sorting from './../../components/Sorting/Sorting';
+import Book from "../../components/Book/Book";
+
 const BookList = () => {
-    const [isActive, setIsActive]=useState(true);
-    const handleActive=()=>{
-      setIsActive(!isActive) 
+  const [tabIndex, setTabIndex] = useState(0);
+  const [displayBook, setDisplayBook] = useState([]);
+  const readBook = getReadItem();
+  const wishList= wishItem();
+  useEffect(()=>{
+    if(tabIndex==0){
+      setDisplayBook(readBook);
     }
-    const book=getReadItem();
-    console.log(book);
+    else if(tabIndex==1){
+      setDisplayBook(wishList);
+    }  
+},[tabIndex]);
+ 
   return (
     <div>
       {/* section title */}
@@ -22,10 +31,12 @@ const BookList = () => {
       </div>
       {/* book list tab */}
       <div className="mt-10 md:mt-32">
-        <div className="flex items-center -mx-4 overflow-x-auto overflow-y-hidden  flex-nowrap dark:bg-gray-100 dark:text-gray-800">
+        <div className="flex items-center overflow-x-auto overflow-y-hidden sm:justify-center flex-nowrap dark:bg-gray-100 dark:text-gray-800">
           <button
-            onClick={()=>handleActive()}
-            className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 dark:border-gray-600 dark:text-gray-600 ${isActive ? "border-b-0 border": "border-b"}`}
+            onClick={() => setTabIndex(0)}
+            className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${
+              tabIndex === 0 ? "border-b-0 text-green-500 border" : "border-b-2"
+            } rounded-t-lg dark:border-gray-600 dark:text-gray-900`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -39,11 +50,13 @@ const BookList = () => {
             >
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
             </svg>
-            <span>Read Book</span>
+            <span onClick={() => handleReadBook()}>Read Book</span>
           </button>
           <button
-           onClick={()=>handleActive()}
-            className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 dark:border-gray-600 dark:text-gray-600 ${ !isActive ? "border-b-0 border": "border-b"}`}
+            onClick={() => setTabIndex(1)}
+            className={`flex items-center flex-shrink-0 px-5 py-3 space-x-2 ${
+              tabIndex === 1 ? "border-b-0 text-green-500 border" : "border-b-2"
+            } rounded-t-lg dark:border-gray-600 dark:text-gray-900`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,12 +73,15 @@ const BookList = () => {
             </svg>
             <span>Wishlist Book</span>
           </button>
-         
-         
         </div>
+      </div>
+      {/* display book list */}
+      <div className="mt-5">
+          {
+            displayBook.map(book=><Book keys={book.bookId} book={book}></Book>)
+          }
       </div>
     </div>
   );
-};
-
+}
 export default BookList;
