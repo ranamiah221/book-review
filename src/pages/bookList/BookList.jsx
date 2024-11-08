@@ -8,8 +8,10 @@ import Book from "../../components/Book/Book";
 const BookList = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [displayBook, setDisplayBook] = useState([]);
+  const [sortedDisplay, setSortedDisplay]=useState([]);
   const readBook = getReadItem();
   const wishList= wishItem();
+  console.log("display",displayBook);
   useEffect(()=>{
     if(tabIndex==0){
       setDisplayBook(readBook);
@@ -18,6 +20,23 @@ const BookList = () => {
       setDisplayBook(wishList);
     }  
 },[tabIndex]);
+
+const handleSorted=value=>{
+  if (value =='rating'){
+     const sortedRating= displayBook.sort((a, b) => b.rating - a.rating);
+    setSortedDisplay(sortedRating);
+     
+  }
+  if (value =='page'){
+    const sortedPage=displayBook.sort((a, b) => b.totalPages - a.totalPages);
+    setSortedDisplay(sortedPage);
+    
+  }
+  else if(value == 'publisherYear'){
+        const sortedYear=displayBook.sort((a,b)=> b.yearOfPublishing - a.yearOfPublishing)
+        setSortedDisplay(sortedYear);
+  }
+}
  
   return (
     <div>
@@ -27,7 +46,7 @@ const BookList = () => {
       </div>
       {/* sorting */}
       <div className="flex justify-center mt-5">
-        <Sorting></Sorting>
+        <Sorting handleSorted={handleSorted}></Sorting>
       </div>
       {/* book list tab */}
       <div className="mt-10 md:mt-32">

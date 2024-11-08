@@ -1,23 +1,23 @@
 import { IoIosArrowDown } from "react-icons/io";
 
-const Sorting = () => {
+const Sorting = ({handleSorted}) => {
     return (
         <div className="dropdown dropdown-bottom dropdown-center">
           <div  tabIndex={0} role="button" className="btn m-1 bg-[#23BE0A] text-white px-16">
-            Sort by <span><IoIosArrowDown /></span>
+            Sort by <span><IoIosArrowDown/></span>
           </div>
           <ul
             tabIndex={0}
             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-48 p-2 shadow"
           >
             <li>
-              <button className="btn mb-1">Rating</button>
+              <button onClick={()=>handleSorted('rating')} className="btn mb-1">Rating</button>
             </li>
             <li>
-            <button className="btn mb-1">Number of Page</button>
+            <button onClick={()=>handleSorted('page')} className="btn mb-1">Number of Page</button>
             </li>
             <li>
-            <button className="btn mb-1">Publisher Year</button>
+            <button onClick={()=>handleSorted('publisherYear')} className="btn mb-1">Publisher Year</button>
             </li>
           </ul>
         </div>

@@ -10,7 +10,6 @@ const Book = ({book}) => {
         rating,
         category,
         tags,
-        review,
         totalPages,
         publisher,
         yearOfPublishing,
