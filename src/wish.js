@@ -1,4 +1,7 @@
 // wish list.....
+
+import Swal from "sweetalert2";
+
 // get items...
 export const wishItem =()=>{
     let wishList=[];
@@ -13,15 +16,63 @@ export const saveWishItem=book=>{
       let wishList= wishItem();
      const isExist= wishList.find(b=> b.bookId == book.bookId);
      if(isExist){
-       return alert('already exist')
+       return Swal.fire({
+        title: "Already Exist",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
      }
      wishList.push(book);
      localStorage.setItem('wishList', JSON.stringify(wishList))
-     alert('read book successfully added')
+     return Swal.fire({
+      title: "Added Read Book successfully",
+      showClass: {
+        popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `
+      },
+      hideClass: {
+        popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `
+      }
+    });
 }
 export const removeWishItem=id=>{
     let wishList=wishItem();
     const remaining = wishList.filter(b=> b.bookId !== id)
     localStorage.setItem('wishList', JSON.stringify(remaining))
-    alert("remove successfully")
+    Swal.fire({
+      title: "Deleted Successfully",
+      showClass: {
+        popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `
+      },
+      hideClass: {
+        popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `
+      }
+    });
 }

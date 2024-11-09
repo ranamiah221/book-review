@@ -134,16 +134,16 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link>
+        <NavLink to='signIn'>
           <button className="bg-[#23BE0A] text-white px-3 py-2 rounded-lg font-medium mr-2">
             Sign in
           </button>
-        </Link>
-        <Link>
+        </NavLink>
+        <NavLink to='signUp'>
           <button className="bg-cyan-500 text-white px-3 py-2 rounded-lg font-medium mr-2">
             Sign up
           </button>
-        </Link>
+        </NavLink>
         <label className="grid cursor-pointer place-items-center">
           <input
             onChange={handleTheme}

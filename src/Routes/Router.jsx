@@ -7,7 +7,6 @@ import SignUp from "../pages/signUp/SignUp";
 import SignIn from "../pages/signIn/SignIn";
 import BookDetails from "../components/BookDetails/BookDetails";
 
-
 const Router = createBrowserRouter([
     {
         path:'/',

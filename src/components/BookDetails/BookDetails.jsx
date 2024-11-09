@@ -5,7 +5,7 @@ import { saveWishItem } from "../../wish";
 const BookDetails = () => {
   const { id } = useParams();
   const books = useLoaderData([]);
-  const book = books?.find(book => book.bookId === id);
+  const book = books?.find(book => book.bookId == id);
   const {
     bookName,
     author,

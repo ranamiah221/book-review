@@ -1,12 +1,16 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '../Shared/Navbar';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 const MyLayouts = () => {
+    const navigation=useNavigate();
     return (
         <div className='max-w-7xl mx-auto'>
             <Navbar></Navbar>
-            <Outlet></Outlet>
+             {
+                navigation.state ==='loading ' ? <LoadingSpinner></LoadingSpinner> : <Outlet></Outlet>
+             }
         </div>
     );
 };
