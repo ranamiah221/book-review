@@ -1,21 +1,38 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "./../components/Provider/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const [theme, setTheme]=useState('light')
+  const [theme, setTheme] = useState("light");
+  const { user, logOut } = useContext(AuthContext);
 
-  useEffect(()=>{
-    localStorage.setItem('theme',theme)
-    const localTheme = localStorage.getItem('theme');
-    document.querySelector('html').setAttribute('data-theme',localTheme);
 
-  },[theme]);
-  const handleTheme=(e)=>{
-    if(e.target.checked){
-      setTheme("forest")
-    }else{
-      setTheme('light')
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+  const handleTheme = (e) => {
+    if (e.target.checked) {
+      setTheme("forest");
+    } else {
+      setTheme("light");
     }
+  };
+  const handleLogOut=()=>{
+    logOut()
+    .then(()=>{
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `log Out Successfully.`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    })
+    .catch(()=>{
+    })
   }
   return (
     <div className="navbar bg-base-100 shadow-md">
@@ -134,12 +151,24 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <NavLink to='signIn'>
-          <button className="bg-[#23BE0A] text-white px-3 py-2 rounded-lg font-medium mr-2">
-            Sign in
-          </button>
-        </NavLink>
-        <NavLink to='signUp'>
+        {user ? (
+          <>
+            <p className="uppercase bg-slate-700 text-white p-2 rounded-lg mr-2 shadow-lg">
+              {user.email.slice(0, 2)}
+            </p>
+            <button onClick={handleLogOut} className="bg-[#23BE0A] text-white px-3 py-2 rounded-lg font-medium mr-2">
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <NavLink to="signIn">
+            <button className="bg-[#23BE0A] text-white px-3 py-2 rounded-lg font-medium mr-2">
+              Sign in
+            </button>
+          </NavLink>
+        )}
+
+        <NavLink to="signUp">
           <button className="bg-cyan-500 text-white px-3 py-2 rounded-lg font-medium mr-2">
             Sign up
           </button>
@@ -180,7 +209,6 @@ const Navbar = () => {
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </label>
-    
       </div>
     </div>
   );
