@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../components/Provider/AuthProvider/AuthProvider';
 
 const SignUp = () => {
+  const {createUser}=useContext(AuthContext);
     const handleSignUp=(event)=>{
         event.preventDefault();
         const form=event.target;
         const email=form.email.value;
         const password=form.password.value;
         console.log(email, password);
+        createUser(email, password)
+        .then(result=>{
+          console.log(result.user)
+        })
+        .catch(error=>{
+          console.log(error)
+        })
     }
     return (
         <div className="flex justify-center mt-5">
