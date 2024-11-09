@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../components/Provider/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
-   
+   const {userSignIn}=useContext(AuthContext);
     
     const handleSignIn=(event)=>{
         event.preventDefault();
@@ -11,6 +12,27 @@ const SignIn = () => {
         const email=form.email.value;
         const password= form.password.value;
         console.log(email, password);
+        userSignIn(email, password)
+        .then(result=>{
+          const user=result.user;
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.email} login Successfully.`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        })
+        .catch(error=>{
+          const errorMassage=error.message.split('/')[1].replace(')','');
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: `${errorMassage}`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        })
     }
   return (
     <div className="flex justify-center mt-5">
