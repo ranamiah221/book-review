@@ -7,10 +7,15 @@ const MyLayouts = () => {
     const navigation=useNavigate();
     return (
         <div className='max-w-7xl mx-auto'>
-            <Navbar></Navbar>
-             {
-                navigation.state ==='loading ' ? <LoadingSpinner></LoadingSpinner> : <Outlet></Outlet>
-             }
+             
+              <div className='h-16'>
+              <Navbar></Navbar>
+              </div>
+                {
+                    navigation.state ==='loading ' ? <LoadingSpinner></LoadingSpinner> : <Outlet></Outlet>
+                }
+                
+            
         </div>
     );
 };

@@ -14,11 +14,13 @@ const AuthProvider = ({children}) => {
      }
 
      const userSignIn=(email, password)=>{
-        return signInWithEmailAndPassword(auth,email,password)
+        setLoading(true)
+        return signInWithEmailAndPassword(auth,email,password)    
      }
 
      useEffect(()=>{
         const unSubscribe = onAuthStateChanged(auth, currentUser=>{
+            setLoading(false)
             setUser(currentUser)
         })
         return ()=>{
@@ -28,6 +30,7 @@ const AuthProvider = ({children}) => {
      },[])
 
     const logOut=()=>{
+        setLoading(true)
         return signOut(auth);
     } 
     

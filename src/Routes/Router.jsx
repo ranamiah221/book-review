@@ -6,11 +6,14 @@ import PageOfRead from "../pages/pageOfRead/PageOfRead";
 import SignUp from "../pages/signUp/SignUp";
 import SignIn from "../pages/signIn/SignIn";
 import BookDetails from "../components/BookDetails/BookDetails";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const Router = createBrowserRouter([
     {
         path:'/',
         element:<MyLayouts></MyLayouts>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 path:'/',
@@ -18,7 +21,7 @@ const Router = createBrowserRouter([
             },
             {
                path:'/bookList',
-               element:<BookList></BookList>,
+               element:<PrivateRoute><BookList></BookList></PrivateRoute>,
             },
             {
                 path:'/bookDetails/:id',
@@ -28,7 +31,7 @@ const Router = createBrowserRouter([
 
             {
                 path:'/pageOfRead',
-                element:<PageOfRead></PageOfRead>
+                element:<PrivateRoute><PageOfRead></PageOfRead></PrivateRoute>
              },
              {
                 path:'/signUp',

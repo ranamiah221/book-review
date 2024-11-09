@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../components/Provider/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 
 const SignIn = () => {
    const {userSignIn}=useContext(AuthContext);
+   const location=useLocation();
+   const navigate= useNavigate();
     
     const handleSignIn=(event)=>{
         event.preventDefault();
         const form= event.target;
         const email=form.email.value;
         const password= form.password.value;
-        console.log(email, password);
         userSignIn(email, password)
         .then(result=>{
           const user=result.user;
@@ -22,6 +23,9 @@ const SignIn = () => {
             showConfirmButton: false,
             timer: 1500
           });
+          {
+            location.state ? navigate(location.state): navigate('/')
+          }
         })
         .catch(error=>{
           const errorMassage=error.message.split('/')[1].replace(')','');
